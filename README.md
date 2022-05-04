@@ -94,6 +94,53 @@ isEmpty(''); // true
 isEmpty(' '); // false
 ```
 
+### isEqual
+Returns true if 2 passed values are equal
+
+```js
+isEqual(value: any): boolean;
+
+// Examples:
+isEqual(1, 1); // true
+isEqual('1', '1'); // true
+isEqual(undefined, undefined); // true
+isEqual(null, undefined); // false
+isEqual(new Date('01/04/2022'), new Date('01/04/2022')); // true
+isEqual(new Date('01/04/2022'), new Date('01/04/2023')); // false
+isEqual(
+    {
+      a: 1,
+      b: {
+        c: [1]
+      }
+    },
+    {
+      a: 1,
+      b: {
+        c: [1]
+      }
+    }
+  )
+); // true
+isEqual(
+    {
+      a: 1,
+      b: {
+        c: [1]
+      }
+    },
+    {
+      a: 1,
+      b: {
+        c: [1, 2]
+      }
+    }
+  )
+); //false
+isEqual([1, { a: 1 }], [1, { a: 1 }]); // true
+isEqual([1, { a: 1, b: 2 }], [1, { b: 2, a: 1 }]); // true
+```
+
 ### merge
 Merge objects or arrays
 
