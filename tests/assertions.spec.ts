@@ -1,4 +1,4 @@
-import { isEmpty, isNumeric } from '@/assertions';
+import { isEmpty, isEqual, isNumeric } from '@/assertions';
 
 describe('Assertions', () => {
   test('isNumeric', async () => {
@@ -25,5 +25,48 @@ describe('Assertions', () => {
     expect(isEmpty([1])).toBe(false);
     expect(isEmpty('')).toBe(true);
     expect(isEmpty(' ')).toBe(false);
+  });
+
+  test('isEqual', async () => {
+    expect(isEqual(1, 1)).toBe(true);
+    expect(isEqual('1', '1')).toBe(true);
+    expect(isEqual(undefined, undefined)).toBe(true);
+    expect(isEqual(null, undefined)).toBe(false);
+    expect(isEqual(new Date('01/04/2022'), new Date('01/04/2022'))).toBe(true);
+    expect(isEqual(new Date('01/04/2022'), new Date('01/04/2023'))).toBe(false);
+    expect(
+      isEqual(
+        {
+          a: 1,
+          b: {
+            c: [1]
+          }
+        },
+        {
+          a: 1,
+          b: {
+            c: [1]
+          }
+        }
+      )
+    ).toBe(true);
+    expect(
+      isEqual(
+        {
+          a: 1,
+          b: {
+            c: [1]
+          }
+        },
+        {
+          a: 1,
+          b: {
+            c: [1, 2]
+          }
+        }
+      )
+    ).toBe(false);
+    expect(isEqual([1, { a: 1 }], [1, { a: 1 }])).toBe(true);
+    expect(isEqual([1, { a: 1, b: 2 }], [1, { b: 2, a: 1 }])).toBe(true);
   });
 });

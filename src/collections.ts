@@ -46,7 +46,7 @@ export function get(path: string | string[], ...args: any[]) {
         const length3 = m.length;
 
         for (let k = 0; k < length3; k++) {
-          const name = m[k];
+          const name: any = m[k];
 
           if ((Array.isArray(value) || isPlainObject(value)) && name in value) {
             value = value[name];
