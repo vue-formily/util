@@ -13,11 +13,19 @@ export function isPlainObject(value: any): value is Record<string, any> {
 }
 
 export function isNumber(value: any): value is number {
-  return typeof value === 'number';
+  return typeof value === 'number' && !isNaN(value);
 }
 
 export function isString(value: any): value is string {
   return typeof value === 'string';
+}
+
+export function isUndefined(value: any) {
+  return value === undefined;
+}
+
+export function isPromise(promise: any) {
+  return promise && typeof promise.then === 'function' && _toString.call(promise) === '[object Promise]';
 }
 
 /**

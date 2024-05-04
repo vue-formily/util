@@ -30,6 +30,13 @@ Strict object type check. Only returns `true` for plain JavaScript objects.
 isPlainObject(value: any): boolean;
 ```
 
+### isUndefined
+Returns `true` if value has type `number`.
+
+```js
+isUndefined(value: any): boolean;
+```
+
 ### isNumber
 Returns `true` if value has type `number`.
 
@@ -181,8 +188,47 @@ Creates a new array with all sub-array elements concatenated into it recursively
 flatArray(arr: any[], deep = Infinity): any[];
 
 // Examples:
-findIndex([1, 2], n => n === 2); // 1
-findIndex([null, { a: 1 }], n => n && n.a === 1); // 3
+flatArray([1, [2], [3, [4]]]) // [1, 2, 3, 4]
+```
+
+
+### interpolate
+Simple string formatter.
+
+```js
+flatArray(arr: any[], deep = Infinity): any[];
+
+// Examples:
+interpolate('{a[b]} {a[c][d]} {value} test', {
+  value: 1,
+  a: {
+    b: 'test',
+    c: {
+      d: 'aaa'
+    }
+  }
+}) // test aaa 1 test
+
+interpolate('{a.b} {a.c.d} {value} test', {
+  value: 1,
+  a: {
+    b: 'test',
+    c: {
+      d: 'aaa'
+    }
+  }
+}) // test aaa 1 test
+
+interpolate('{a.b} {a.c[d]} {a.d[2]} {value} test', {
+  value: 1,
+  a: {
+    b: 'test',
+    c: {
+      d: 'aaa'
+    },
+    d: [1, 2, 3]
+  }
+}) // test aaa 3 1 test
 ```
 
 ## Contributing

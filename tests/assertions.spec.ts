@@ -1,6 +1,20 @@
-import { isEmpty, isEqual, isNumeric } from '@/assertions';
+import { isEmpty, isEqual, isNumeric, isNumber, isPromise } from '@/assertions';
 
 describe('Assertions', () => {
+  test('isPromise', async () => {
+    expect(isPromise(new Promise(() => {}))).toBe(true);
+    expect(isPromise((async () => {})())).toBe(true);
+  });
+
+  test('isNumber', async () => {
+    expect(isNumber(1)).toBe(true);
+    expect(isNumber('1')).toBe(false);
+    expect(isNumber({})).toBe(false);
+    expect(isNumber(null)).toBe(false);
+    expect(isNumber(undefined)).toBe(false);
+    expect(isNumber(NaN)).toBe(false);
+  });
+
   test('isNumeric', async () => {
     expect(isNumeric('123')).toBe(true);
     expect(isNumeric('123.12')).toBe(true);
